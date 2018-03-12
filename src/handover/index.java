@@ -2,6 +2,7 @@ package handover;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.List;
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class index extends JFrame {
             for (int col = 0; col < grid[row].length; col++) {
             	cells_counter++;
             	
-            	grid[row][col] = new JLabel(row+""+col+":"+cells_counter);
+            	grid[row][col] = new JLabel(cells_counter+"");
             	grid[row][col].setBounds(x, y, 100, 100);
             	
             	grid[row][col].setOpaque(true);
@@ -95,6 +96,8 @@ public class index extends JFrame {
             y = y+100;
             x = 20;
 		}
+		
+		procedure1();
 	}
 	
 	private int[] getCellTALs(int cell){
@@ -111,5 +114,14 @@ public class index extends JFrame {
 		int[] tscopy = new int[counter];
 		System.arraycopy(ts, 0, tscopy, 0, tscopy.length);
 		return tscopy;
+	}
+	
+	private void procedure1(){
+		UE ue1 = new UE();
+		ue1.location = 1;
+		ue1.speed = 10;
+		ue1.eNOB = 1;
+		ue1.TAL = 0;
+		ue1.path = new int[]{2 ,7 , 12 , 17 , 22};
 	}
 }
