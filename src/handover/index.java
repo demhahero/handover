@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.JLabel;
 
 public class index extends JFrame {
@@ -34,6 +35,8 @@ public class index extends JFrame {
 		});
 	}
 
+	int cell_width = 130;
+	int cell_height = 130;
 	
 	int[][] TALs = new int[6][5];
 	Color[] TALsColors = new Color[6];
@@ -57,7 +60,7 @@ public class index extends JFrame {
 		TALs[1] = new int []{2,3,4,9, 1};
 		TALs[2] = new int []{8,12,13,14, 15, 7};
 		TALs[3] = new int []{5,10,15,20};
-		TALs[4] = new int []{16,17,21,22 , 23};
+		TALs[4] = new int []{16,17,21,22, 18};
 		TALs[5] = new int []{23,24,25,18,19};
 		
 		
@@ -66,7 +69,7 @@ public class index extends JFrame {
     		float r = rand.nextFloat();
         	float g = rand.nextFloat();
         	float b = rand.nextFloat();
-        	Color randomColor = new Color(r, g, b, 0.2f);
+        	Color randomColor = new Color(r, g, b, 0.5f);
         	TALsColors[i] = randomColor;
     	}
 		
@@ -78,22 +81,26 @@ public class index extends JFrame {
             	cells_counter++;
             	
             	grid[row][col] = new JLabel(cells_counter+"");
-            	grid[row][col].setBounds(x, y, 100, 100);
+            	grid[row][col].setBounds(x, y, cell_width, cell_height);
             	
             	grid[row][col].setOpaque(true);
             	grid[row][col].setHorizontalAlignment(JLabel.CENTER);
             	grid[row][col].setVerticalAlignment(JLabel.CENTER);
             	
-            	if(getCellTALs(cells_counter).length == 1)
+            	if(getCellTALs(cells_counter).length == 1){
+            		grid[row][col].setText("eNOB"+cells_counter+" ("+getCellTALs(cells_counter)[0]+")");
             		grid[row][col].setBackground(TALsColors[getCellTALs(cells_counter)[0]]);
+            	}
             	else{
-            		grid[row][col].setBackground(new Color(255,255,255));
+            		grid[row][col].setText("<html><center>eNOB"+cells_counter+"<br>("+getCellTALs(cells_counter)[0]+","+getCellTALs(cells_counter)[1]+")</center><html>");
+            		grid[row][col].setBackground(TALsColors[getCellTALs(cells_counter)[0]]);
+            		grid[row][col].setBorder(new MatteBorder(25, 10, 25, 10, TALsColors[getCellTALs(cells_counter)[1]]));
             	}
             	
             	contentPane.add(grid[row][col]);
-            	x = x+100;
+            	x = x+cell_width;
             }
-            y = y+100;
+            y = y+cell_height;
             x = 20;
 		}
 		
